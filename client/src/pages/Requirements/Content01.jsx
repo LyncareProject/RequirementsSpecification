@@ -1,148 +1,235 @@
 import { useNavigate } from "react-router-dom";
 import RequirementControl from "../../components/RequirementsControl/RequirementControl";
+import { useDispatch, useSelector } from "react-redux";
+import { setting } from "../../redux/requirements.slice";
 
 const Content01 = (props) => {
-  const handleCategory = (key) => {
-    props.setCategory((prevCategory) => ({
-      ...prevCategory,
-      [key]: !props.category[key],
-    }));
-  };
-  const handleSubCategory = (key) => {
-    props.setSubCategory((prevSubCategory) => ({
-      ...prevSubCategory,
-      [key]: !props.subCategory[key],
-    }));
-  };
+  const requirements = useSelector((state) => state.requirementsSlice.value);
+  const { category, subCategory } = requirements;
 
+  const dispatch = useDispatch();
+  const handleNextBtn = (subCategory) => {
+    return Object.values(subCategory).some((value) => value === true);
+  };
   return (
     <div className="RequirementsBodyContents">
       <div className="RequirementsBodyContentsWrap">
         <div
           className="RequirementsBodyContentsBox"
-          onClick={() => handleCategory("develop")}
+          onClick={async () =>
+            await dispatch(
+              setting({ category: { ...category, develop: !category.develop } })
+            )
+          }
         >
           <input
             type="checkbox"
             name="develop"
-            checked={props.category.develop}
-            onClick={() => handleCategory("develop")}
+            checked={category.develop}
+            onChange={async () =>
+              await dispatch(
+                setting({
+                  category: { ...category, develop: !category.develop },
+                })
+              )
+            }
           />
           <p>개발</p>
         </div>
         <div
           className="RequirementsBodyContentsBox"
-          onClick={() => handleCategory("design")}
+          onClick={async () =>
+            await dispatch(
+              setting({ category: { ...category, design: !category.design } })
+            )
+          }
         >
           <input
             type="checkbox"
             name="design"
-            checked={props.category.design}
-            onClick={() => handleCategory("design")}
+            checked={category.design}
+            onChange={async () =>
+              await dispatch(
+                setting({ category: { ...category, design: !category.design } })
+              )
+            }
           />
           <p>디자인</p>
         </div>
         <div
           className="RequirementsBodyContentsBox"
-          onClick={() => handleCategory("planning")}
+          onClick={async () =>
+            await dispatch(
+              setting({
+                category: { ...category, planning: !category.planning },
+              })
+            )
+          }
         >
           <input
             type="checkbox"
             name="planning"
-            checked={props.category.planning}
-            onClick={() => handleCategory("planning")}
+            checked={category.planning}
+            onChange={async () =>
+              await dispatch(
+                setting({
+                  category: { ...category, planning: !category.planning },
+                })
+              )
+            }
           />
           <p>기획</p>
         </div>
       </div>
-      {!props.category.develop &&
-      !props.category.design &&
-      !props.category.planning ? null : (
+      {!category.develop && !category.design && !category.planning ? null : (
         <div className="RequirementsBodyContentsWrap">
           <div
             className={
-              props.subCategory.web
+              subCategory.web
                 ? "RequirementsBodyContentsClick Clicked"
                 : "RequirementsBodyContentsClick"
             }
-            onClick={() => handleSubCategory("web")}
+            onClick={async () =>
+              await dispatch(
+                setting({
+                  subCategory: { ...subCategory, web: !subCategory.web },
+                })
+              )
+            }
           >
             웹
           </div>
           <div
             className={
-              props.subCategory.application
+              subCategory.application
                 ? "RequirementsBodyContentsClick Clicked"
                 : "RequirementsBodyContentsClick"
             }
-            onClick={() => handleSubCategory("application")}
+            onClick={async () =>
+              await dispatch(
+                setting({
+                  subCategory: {
+                    ...subCategory,
+                    application: !subCategory.application,
+                  },
+                })
+              )
+            }
           >
             어플리케이션
           </div>
           <div
             className={
-              props.subCategory.software
+              subCategory.software
                 ? "RequirementsBodyContentsClick Clicked"
                 : "RequirementsBodyContentsClick"
             }
-            onClick={() => handleSubCategory("software")}
+            onClick={async () =>
+              await dispatch(
+                setting({
+                  subCategory: {
+                    ...subCategory,
+                    software: !subCategory.software,
+                  },
+                })
+              )
+            }
           >
             소프트웨어
           </div>
           <div
             className={
-              props.subCategory.publishing
+              subCategory.publishing
                 ? "RequirementsBodyContentsClick Clicked"
                 : "RequirementsBodyContentsClick"
             }
-            onClick={() => handleSubCategory("publishing")}
+            onClick={async () =>
+              await dispatch(
+                setting({
+                  subCategory: {
+                    ...subCategory,
+                    publishing: !subCategory.publishing,
+                  },
+                })
+              )
+            }
           >
             퍼블리싱
           </div>
           <div
             className={
-              props.subCategory.wordpress
+              subCategory.wordpress
                 ? "RequirementsBodyContentsClick Clicked"
                 : "RequirementsBodyContentsClick"
             }
-            onClick={() => handleSubCategory("wordpress")}
+            onClick={async () =>
+              await dispatch(
+                setting({
+                  subCategory: {
+                    ...subCategory,
+                    wordpress: !subCategory.wordpress,
+                  },
+                })
+              )
+            }
           >
             워드프레스
           </div>
           <div
             className={
-              props.subCategory.embedded
+              subCategory.embedded
                 ? "RequirementsBodyContentsClick Clicked"
                 : "RequirementsBodyContentsClick"
             }
-            onClick={() => handleSubCategory("embedded")}
+            onClick={async () =>
+              await dispatch(
+                setting({
+                  subCategory: {
+                    ...subCategory,
+                    embedded: !subCategory.embedded,
+                  },
+                })
+              )
+            }
           >
             임베디드
           </div>
           <div
             className={
-              props.subCategory.game
+              subCategory.game
                 ? "RequirementsBodyContentsClick Clicked"
                 : "RequirementsBodyContentsClick"
             }
-            onClick={() => handleSubCategory("game")}
+            onClick={async () =>
+              await dispatch(
+                setting({
+                  subCategory: { ...subCategory, game: !subCategory.game },
+                })
+              )
+            }
           >
             게임
           </div>
           <div
             className={
-              props.subCategory.etc
+              subCategory.etc
                 ? "RequirementsBodyContentsClick Clicked"
                 : "RequirementsBodyContentsClick"
             }
-            onClick={() => handleSubCategory("etc")}
+            onClick={async () =>
+              await dispatch(
+                setting({
+                  subCategory: { ...subCategory, etc: !subCategory.etc },
+                })
+              )
+            }
           >
             기타
           </div>
         </div>
       )}
 
-      <RequirementControl prevBtn={false} page={1} />
+      <RequirementControl prevBtn={false} nextBtn={handleNextBtn(subCategory)} page={1} />
     </div>
   );
 };

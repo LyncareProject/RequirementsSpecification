@@ -1,7 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import RequirementControl from "../../components/RequirementsControl/RequirementControl";
+import { useDispatch, useSelector } from "react-redux";
+import { setting } from "../../redux/requirements.slice";
 
 const Content03 = (props) => {
+  const requirements = useSelector((state) => state.requirementsSlice.value);
+  const { desc } = requirements;
+  const dispatch = useDispatch();
   return (
     <div className="RequirementsBodyContents">
       <div>
@@ -16,11 +21,11 @@ const Content03 = (props) => {
         </p>
         <textarea
           className="RequirementsBodyTextArea"
-          value={props.desc}
-          onChange={(e) => props.setDesc(e.target.value)}
+          value={ desc }
+          onChange={(e) => dispatch(setting({ desc: e.target.value }))}
         />
       </div>
-      <RequirementControl prevBtn={true} page={3} />
+      <RequirementControl prevBtn={true} nextBtn={true} page={3} setPage={props.setPage} />
     </div>
   );
 };

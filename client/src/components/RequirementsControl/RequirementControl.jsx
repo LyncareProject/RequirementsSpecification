@@ -1,28 +1,36 @@
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setting } from "../../redux/requirements.slice";
 
-const RequirementControl = (props)=>{
-  const navigate = useNavigate()
-  return(
+const RequirementControl = (props) => {
+  const page = useSelector((state) => state.requirementsSlice.value.page);
+  const dispatch = useDispatch();
+  console.log(props.nextBtn)
+  return (
     <div className="RequirementsBodyControls">
-    {props.prevBtn ?(
-      <button
-        className="PrevBtn"
-        onClick={() => {
-          navigate(`/requirements/${props.page - 1}`);
-        }}
-      >
-        이전
-      </button>
-    ) : null }
-    <button
-      className="NextBtn"
-      onClick={() => {
-        navigate(`/requirements/${props.page + 1}`);
-      }}
-    >
-      다음
-    </button>
-  </div>
-  )
-}
+      {page === 1 ? null : (
+        <button
+          className="PrevBtn"
+          onClick={async () => {
+            await dispatch(setting({ page: props.page - 1 }));
+          }}
+        >
+          이전
+        </button>
+      )}
+      {page === 7 ? (
+        <button className="NextBtn">완료</button>
+      ) : (
+        <button
+          className={ props.nextBtn ? "NextBtn" : "NextBtn InactiveBtn"}
+          disabled={ !props.nextBtn }
+          onClick={async () => {
+            await dispatch(setting({ page: props.page + 1 }));
+          }}
+        >
+          다음
+        </button>
+      )}
+    </div>
+  );
+};
 export default RequirementControl;

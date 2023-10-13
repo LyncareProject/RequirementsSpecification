@@ -5,7 +5,7 @@ const Content06 = (props) => {
   return (
     <div className="RequirementsBodyContents">
       <div className="">Content06</div>
-      <RequirementControl prevBtn={true} page={6} />
+      <RequirementControl prevBtn={true} page={6} setPage={props.setPage} />
     </div>
   );
 };
