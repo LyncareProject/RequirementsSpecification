@@ -5,7 +5,9 @@ import Main from "./pages/Main/Main";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
+
 function App() {
+
   const [requirementsModal, setRequirementsModal] = useState(false);
   const state = useSelector((state) => state.requirementsSlice.value);
   useEffect(() => {

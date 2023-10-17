@@ -24,8 +24,8 @@ const RequirementsPage = (props) => {
         <div className="RequirementsHeader">
           <div className="RequirementsHeaderTitle">요구사항 명세서</div>
           <div className="RequirementsHeaderControls">
-            <div className="RequirementsHeaderMinimize"></div>
-            <div className="RequirementsHeaderMaximize"></div>
+            {/* <div className="RequirementsHeaderMinimize"></div>
+            <div className="RequirementsHeaderMaximize"></div> */}
             <div
               className="RequirementsHeaderClose"
               onClick={() => {

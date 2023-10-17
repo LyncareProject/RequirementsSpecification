@@ -1,10 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setting } from "../../redux/requirements.slice";
+import { requirementsCompleted } from "../../service/requirements.service";
+
 
 const RequirementControl = (props) => {
+  const requirements = useSelector((state) => state.requirementsSlice.value);
   const page = useSelector((state) => state.requirementsSlice.value.page);
+
+
   const dispatch = useDispatch();
-  console.log(props.nextBtn)
+  const completeBtn = () => {
+    requirementsCompleted(requirements);
+  };
   return (
     <div className="RequirementsBodyControls">
       {page === 1 ? null : (
@@ -18,11 +25,17 @@ const RequirementControl = (props) => {
         </button>
       )}
       {page === 7 ? (
-        <button className="NextBtn">완료</button>
+        <button
+          className={props.nextBtn ? "NextBtn" : "NextBtn InactiveBtn"}
+          disabled={!props.nextBtn}
+          onClick={completeBtn}
+        >
+          완료
+        </button>
       ) : (
         <button
-          className={ props.nextBtn ? "NextBtn" : "NextBtn InactiveBtn"}
-          disabled={ !props.nextBtn }
+          className={props.nextBtn ? "NextBtn" : "NextBtn InactiveBtn"}
+          disabled={!props.nextBtn}
           onClick={async () => {
             await dispatch(setting({ page: props.page + 1 }));
           }}

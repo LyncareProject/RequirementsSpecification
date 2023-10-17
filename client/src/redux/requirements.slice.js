@@ -24,6 +24,36 @@ const initialStateValue = {
   projectProgress : null,
   planningStatus : null,
   desc: defaultDesc,
+  budget : null,
+  startDate : null,
+  progressPeriod : null,
+  preMeeting : null,
+  meeting: null,
+  meetingCycle: null,
+  city : null, 
+  district : null,
+  deadlineDate : null,
+  supportProject : null,
+  applicantRequirements : {
+    applicantRequirements01: false,
+    applicantRequirements02: false,
+    applicantRequirements03: false,
+    applicantRequirements04: false,
+    applicantRequirements05: null,
+    applicantRequirementsDesc: null,
+  },
+  question : null,
+  manpower : null,
+  managingExperience: null,
+  futurePlans: {
+    month: false,
+    update: false,
+  },
+  projectPriorities : {
+    first: null,
+    second : null,
+    third : null
+  }
 }
 
 export const requirementsSlice = createSlice({
